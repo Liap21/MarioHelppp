@@ -27,9 +27,15 @@ public class Game extends Canvas implements Runnable {
 
     private Thread thread;
     private boolean running = false;
-    private BufferedImage image;
+    private static BufferedImage[] levels;
+    private static int level = 0;
+
+    private static BufferedImage background;
+    private static BufferedImage background1;
+    private static BufferedImage background2;
 
     public static int coins = 0;
+    public static int score = 0;
     public static int lives = 4;
     public static int deathScreenTime = 0;
     public static boolean gameOver = false;
@@ -39,6 +45,7 @@ public class Game extends Canvas implements Runnable {
 
     public static Handler handler;
     public static SpriteSheet sheet;
+    public SpriteSheet sheet2;
     public static Camera cam;
     public static Launcher launcher;
     public static MouseInput mouse;
@@ -48,14 +55,38 @@ public class Game extends Canvas implements Runnable {
     public static Sprite usedPowerUp;
     public static Sprite pipe;
     public static Sprite coin;
+    public static Sprite star;
+    public static Sprite fireball;
+    public static Sprite flower;
+    public static Sprite phirana;
     
     public static Sprite[] player;
+    public static Sprite[] firePlayer;
     public static Sprite mushroom;
     public static Sprite lifeMushroom;
     public static Sprite[] goomba;
     public static Sprite[] koopa;
+    public static Sprite[] alien;
+    public static Sprite[] minion;
+    public static Sprite[] marsh;
+    public static Sprite[] pirate;
+    public static Sprite[] ghost;
+    public static Sprite[] particle;
     public static Sprite koopaShell;
     public KoopaStates koopaState;
+    public static Sprite[] bossIdle;
+
+    public static Sprite[] flag;
+
+    public static Sound jump;
+    public static Sound goombastomp;
+    public static Sound levelcomplete;
+    public static Sound losealife;
+    public static Sound themesong;
+    public static Sound powerup;
+    public static Sound getcoin;
+    public static Sound firethrow;
+    public static Sound mobhit;
 
 
     public Game() {
@@ -68,6 +99,7 @@ public class Game extends Canvas implements Runnable {
     private void init() {
         handler = new Handler();
         sheet = new SpriteSheet("/Sprite.jpg");
+        sheet2 = new SpriteSheet("/Sprite2.jpg");
         cam = new Camera();
         launcher = new Launcher();
         mouse = new MouseInput();
@@ -83,32 +115,98 @@ public class Game extends Canvas implements Runnable {
         usedPowerUp = new Sprite(sheet, 13, 1);
         pipe = new Sprite(sheet, 14, 1);
         coin = new Sprite(sheet, 15, 1);
+        star = new Sprite(sheet, 13, 2);
 
         mushroom = new Sprite(sheet, 16, 2);
         lifeMushroom = new Sprite(sheet, 15, 2);
+        phirana = new Sprite(sheet, 8, 2);
         goomba = new Sprite[9];
+        minion = new Sprite[4];
+        ghost = new Sprite[4];
+        alien = new Sprite[2];
         player = new Sprite[12];
-        koopa = new Sprite[12];
-        koopaShell = new Sprite(sheet, 16, 2);
+        pirate = new Sprite[4];
+        marsh = new Sprite[9];
+        koopa = new Sprite[9];
+        koopaShell = new Sprite(sheet, 5, 3);
+        flag = new  Sprite[1];
+        particle = new Sprite[5];
+        firePlayer = new Sprite[8];
+        flower = new Sprite(sheet, 14, 2);
+        fireball = new Sprite(sheet, 15 ,1);
+
+        bossIdle = new Sprite[4];
+
+        levels = new BufferedImage[3];
+
 
         for(int i = 0;i<player.length;i++) {
             player[i] = new Sprite(sheet, i+1, 1) ;
         }
 
         for(int i = 0;i<goomba.length;i++) {
-            goomba[i] = new Sprite(sheet, i+1, 2) ;
+            goomba[i] = new Sprite(sheet, i+7, 2) ;
+          }
+
+        for(int i = 0;i<minion.length;i++) {
+            minion[i] = new Sprite(sheet, i+1, 3) ;
         }
-            for (int i = 0; i < koopa.length; i++) {
-                koopa[i] = new Sprite(sheet, i + 1, 2);
+
+        for (int i = 0; i < koopa.length; i++) {
+            koopa[i] = new Sprite(sheet, i+7, 2);
             }
+        for(int i=0;i<flag.length;i++) {
+            flag[i] = new Sprite(sheet2, i+16, 3);
+        }
+        for(int i=0;i<particle.length;i++) {
+            particle[i] = new Sprite(sheet, i+1, 3);
+        }
+        for(int i = 0;i<firePlayer.length;i++) {
+            firePlayer[i] = new Sprite(sheet, i+8, 1) ;
+        }
+        for(int i = 0;i<koopa.length;i++) {
+            koopa[i] = new Sprite(sheet, i+4, 3) ;
+        }
+        for(int i = 0;i<ghost.length;i++) {
+            ghost[i] = new Sprite(sheet, i+5, 4) ;
+        }
+        for(int i = 0;i<pirate.length;i++) {
+            pirate[i] = new Sprite(sheet, i+1, 4) ;
+        }
+        for(int i = 0;i<marsh.length;i++) {
+            marsh[i] = new Sprite(sheet2, i+2, 4) ;
+        }
+        for(int i = 0;i<alien.length;i++) {
+            alien[i] = new Sprite(sheet, i+9, 4) ;
+        }
+
+        for(int i = 0;i<bossIdle.length;i++) {
+            bossIdle[i] = new Sprite(sheet, i+5, 3) ;
+        }
+
 
 
         try {
-            image = ImageIO.read(getClass().getResource("/level.png"));
+
+            levels[0] = ImageIO.read(getClass().getResource("/level.png"));
+            levels[1] = ImageIO.read(getClass().getResource("/level2.png"));
+            levels[2] = ImageIO.read(getClass().getResource("/bosslevel.png"));
+            background = ImageIO.read(getClass().getResource("/scoobydoobackground.png"));
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        jump = new Sound("/jump.wav");
+        goombastomp = new Sound("/StompingGoomba.wav");
+        levelcomplete = new Sound("/level complete.wav");
+        losealife = new Sound("/death-sound.wav");
+        themesong = new Sound("/retro-funk-theme-music.wav");
+        powerup = new Sound("/power-up.wav");
+        getcoin = new Sound("/getcoin.wav");
+        firethrow = new Sound("/StompingGoomba.wav");
+        mobhit = new Sound("/mob-hit.wav");
 
 
     }
@@ -170,19 +268,25 @@ public class Game extends Canvas implements Runnable {
         }
         Graphics g = bs.getDrawGraphics();
 
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, getWidth(), getHeight());
        if(!showDeathScreen) {
+           g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
+
            g.setColor(Color.WHITE);
            g.setFont(new Font("Courier", Font.BOLD, 20));
            g.drawString("x" + coins, 100, 95);
            g.drawImage(coin.getBufferedImage(), 20, 20, 75, 75, null);
+           g.setFont(new Font("Courier", Font.BOLD, 20));
+           g.drawString("Score: " + score, 100, 150);
+
        }
         if(showDeathScreen) {
+            g.setColor(Color.BLACK);
+            g.fillRect(0,0,getWidth(),getHeight());
+
             if(!gameOver) {
                 g.setColor(Color.WHITE);
                 g.setFont(new Font("Courier", Font.BOLD, 20));
-                g.drawImage(player[4].getBufferedImage(), 500, 300, 100, 100, null);
+                g.drawImage(player[4].getBufferedImage(), 500,  300, 100, 100, null);
                 g.drawString("x" + lives, 610, 370);
             } else {
                 g.setColor(Color.WHITE);
@@ -192,11 +296,16 @@ public class Game extends Canvas implements Runnable {
             }
 
        if(playing) g.translate(cam.getX(), cam.getY());
-        if(!showDeathScreen&&playing) handler.render(g);
+        if(!showDeathScreen&&playing) handler.  render(g);
         else if(!playing) launcher.render(g);
         g.dispose();
         bs.show();
     }
+
+    private boolean isActiveLevel(BufferedImage level) {
+        return true;
+    }
+
     public void tick() {
         if(playing) handler.tick();
 
@@ -212,7 +321,9 @@ public class Game extends Canvas implements Runnable {
                 showDeathScreen = false;
                 deathScreenTime = 0;
                 handler.clearLevel();
-                handler.createLevel(image);
+                handler.createLevel(levels[level]);
+
+               // themesong.play();
             } else if(gameOver) {
                 showDeathScreen = false;
                 deathScreenTime = 0;
@@ -229,6 +340,16 @@ public class Game extends Canvas implements Runnable {
 
     public static int getFrameHeight() {
         return HEIGHT*SCALE;
+    }
+
+    public static void switchLevel() {
+        Game.level++;
+
+        handler.clearLevel();
+        handler.createLevel(levels[level]);
+
+        //Game.themesong.close();
+        Game.levelcomplete.play();
     }
 
     public static void main(String[] args) {

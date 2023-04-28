@@ -43,7 +43,7 @@ public class Koopa extends Entity {
     public void render(Graphics g) {
 
             if(koopaState==KoopaStates.WALKING) {
-                g.drawImage(Game.koopa[frame+1].getBufferedImage(), x, y, width, height, null);
+                g.drawImage(Game.koopa[frame+4].getBufferedImage(), x, y, width, height, null);
             } else {
                 g.drawImage(Game.koopaShell.getBufferedImage(), x, y, width, height, null);
             }
@@ -124,7 +124,7 @@ public class Koopa extends Entity {
             frameDelay++;
             if (frameDelay>=3) {
                 frame++;
-                if(frame>=5) {
+                if(frame>=3) {
                     frame = 0;
                 }
                 frameDelay = 0;

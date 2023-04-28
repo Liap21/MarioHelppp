@@ -3,10 +3,13 @@ package com.tutorial.mario.tile;
 import com.tutorial.mario.Game;
 import com.tutorial.mario.Handler;
 import com.tutorial.mario.Id;
+import com.tutorial.mario.entity.powerup.Flower;
 import com.tutorial.mario.entity.powerup.Mushroom;
 import com.tutorial.mario.gfx.Sprite;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class PowerUpBlock extends Tile {
 
@@ -16,8 +19,10 @@ public class PowerUpBlock extends Tile {
 
     private int SpriteY = getY();
     private int type;
+    private Random random;
 
-    public PowerUpBlock(int x, int y, int width, int height, boolean solid, Id id, Handler handler, Sprite powerUp, int type) {
+
+    public PowerUpBlock(int x, int y, int width, int height, boolean solid, Id id, Handler handler,Sprite powerUp,int type) {
         super(x, y, width, height, solid, id, handler);
         this.type = type;
         this.powerUp = powerUp;
@@ -33,7 +38,8 @@ public class PowerUpBlock extends Tile {
         if(activated&&!poppedUp) {
             SpriteY--;
             if(SpriteY<=y-height) {
-                handler.addEntity(new Mushroom(x, SpriteY, width, height, Id.mushroom, handler, type));
+                if(powerUp==Game.mushroom||powerUp==Game.lifeMushroom) handler.addEntity(new Mushroom(x, SpriteY, width, height, Id.mushroom, handler,powerUp,type));
+                else if(powerUp==Game.flower) handler.addEntity(new Flower(x, SpriteY, width, height, Id.flower, handler));
                 poppedUp = true;
             }
         }

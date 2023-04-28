@@ -1,5 +1,5 @@
 package com.tutorial.mario.states;
 
 public enum PlayerState {
-    BIG, SMALL, DEAD
+    BIG, SMALL, DEAD, FIRE
 }

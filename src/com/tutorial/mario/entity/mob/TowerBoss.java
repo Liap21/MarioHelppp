@@ -1,5 +1,6 @@
 package com.tutorial.mario.entity.mob;
 
+import com.tutorial.mario.Game;
 import com.tutorial.mario.Handler;
 import com.tutorial.mario.Id;
 import com.tutorial.mario.entity.Entity;
@@ -15,6 +16,10 @@ public class TowerBoss extends Entity {
 
     public boolean addJumpTime = false;
 
+    private int frame = 0;
+    private int frameDelay = 0;
+    private boolean animate = false;
+
     private Random random;
 
     public TowerBoss(int x, int y, int width, int height, Id id, Handler handler, int hp) {
@@ -23,10 +28,11 @@ public class TowerBoss extends Entity {
 
         bossState = BossState.IDLE;
         random = new Random();
+
     }
 
     public void render(Graphics g) {
-        if(bossState==BossState.IDLE||bossState==BossState.SPINNING) g.setColor(Color.GRAY);
+        if(bossState==BossState.IDLE||bossState==BossState.SPINNING) g.drawImage(Game.bossIdle[frame + 3].getBufferedImage(), x, y, width, height, null);
         else if(bossState==BossState.RECOVERING) g.setColor(Color.RED);
         else g.setColor(Color.ORANGE);
 
@@ -140,6 +146,16 @@ public class TowerBoss extends Entity {
         if(falling) {
             gravity+=0.17;
             setVelY((int) gravity);
+        }
+        if(animate) {
+            frameDelay++;
+            if (frameDelay>=3) {
+                frame++;
+                if(frame>=2) {
+                    frame = 0;
+                }
+                frameDelay = 0;
+            }
         }
         }
         public void chooseState() {

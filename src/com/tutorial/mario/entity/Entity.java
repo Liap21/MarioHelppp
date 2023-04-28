@@ -5,6 +5,7 @@ import com.tutorial.mario.Handler;
 import com.tutorial.mario.Id;
 import com.tutorial.mario.states.BossState;
 import com.tutorial.mario.states.KoopaStates;
+import com.tutorial.mario.states.PlayerState;
 
 import java.awt.*;
 
@@ -27,6 +28,7 @@ public abstract class Entity {
     public Id id;
     public BossState bossState;
     public KoopaStates koopaState;
+    public PlayerState state;
     public double gravity = 0.0;
     public Handler handler;
 
@@ -49,8 +51,12 @@ public abstract class Entity {
         if(getId()==Id.player) {
             Game.lives--;
             Game.showDeathScreen = true;
+            Game.coins = 0;
+            Game.score = 0;
 
             if(Game.lives<=0) Game.gameOver = true;
+
+            Game.losealife.play();
         }
     }
     public int getX() {
@@ -78,6 +84,22 @@ public abstract class Entity {
 
     public int getType() {
         return type;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public Rectangle getBounds() {

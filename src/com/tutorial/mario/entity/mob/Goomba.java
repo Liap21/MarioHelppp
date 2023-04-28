@@ -37,7 +37,7 @@ public class Goomba extends Entity {
         if(facing == 0) {
             g.drawImage(Game.goomba[frame+3].getBufferedImage(), x, y, width, height, null);
         } else if(facing == 1) {
-            g.drawImage(Game.goomba[frame].getBufferedImage(), x, y, width, height, null);
+            g.drawImage(Game.goomba[frame+3].getBufferedImage(), x, y, width, height, null);
         }
     }
 
@@ -68,10 +68,12 @@ public class Goomba extends Entity {
                 }
                 if (getBoundsLeft().intersects(t.getBounds())) {
                     setVelX(1);
+                    facing = 0;
                     x = t.getX()+t.width;
                 }
                 if (getBoundsRight().intersects(t.getBounds())) {
                     setVelX(-1);
+                    facing = 1;
                     x = t.getX()-t.width;
                 }
             }
@@ -85,7 +87,7 @@ public class Goomba extends Entity {
             frameDelay++;
             if (frameDelay>=3) {
                 frame++;
-                if(frame>=5) {
+                if(frame>=2) {
                     frame = 0;
                 }
                 frameDelay = 0;

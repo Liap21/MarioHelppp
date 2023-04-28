@@ -4,10 +4,12 @@ import com.tutorial.mario.Game;
 import com.tutorial.mario.Handler;
 import com.tutorial.mario.Id;
 import com.tutorial.mario.entity.Entity;
+import com.tutorial.mario.entity.Particle;
 import com.tutorial.mario.states.BossState;
 import com.tutorial.mario.states.KoopaStates;
 import com.tutorial.mario.states.PlayerState;
 import com.tutorial.mario.tile.Tile;
+import com.tutorial.mario.tile.Trail;
 
 import java.awt.*;
 import java.util.Random;
@@ -17,12 +19,18 @@ public class Player extends Entity {
     private PlayerState state;
 
     private int pixelsTravelled = 0;
+    private int invincibilityTime = 0;
+    private int particleDelay = 0;
+    private int restoreTime;
 
     private int frame = 0;
     private int frameDelay = 0;
 
     private boolean animate = false;
+    private boolean restoring;
     private Random random;
+
+    private boolean invincible = false;
 
     public Player(int x, int y, int width, int height, Id id, Handler handler) {
         super(x, y, width, height, id, handler);
@@ -32,22 +40,69 @@ public class Player extends Entity {
     }
 
     public void render(Graphics g) {
-        if(facing == 0) {
-            g.drawImage(Game.player[frame+5].getBufferedImage(), x, y, width, height, null);
-        } else if(facing == 1) {
-            g.drawImage(Game.player[frame].getBufferedImage(), x, y, width, height, null);
+        if (state == PlayerState.FIRE) {
+            if (facing == 0) {
+                g.drawImage(Game.firePlayer[frame + 3].getBufferedImage(), x, y, width, height, null);
+            } else if (facing == 1) {
+                g.drawImage(Game.firePlayer[frame].getBufferedImage(), x, y, width, height, null);
+            }
+        } else {
+            if (facing == 0) {
+                g.drawImage(Game.player[frame + 5].getBufferedImage(), x, y, width, height, null);
+            } else if (facing == 1) {
+                g.drawImage(Game.player[frame].getBufferedImage(), x, y, width, height, null);
+            }
         }
     }
 
     public void tick() {
+
         x+=velX;
         y+=velY;
+
+        if(invincible) {
+            if(facing == 0) handler.addTile(new Trail(getX(), getY(), getWidth(), getHeight(), false, Id.trail, handler, Game.player[frame+5].getBufferedImage()));
+            else if(facing == 1) handler.addTile(new Trail(getX(), getY(), getWidth(), getHeight(), false, Id.trail, handler, Game.player[frame].getBufferedImage()));
+
+            particleDelay++;
+            if(particleDelay>=3) {
+                handler.addEntity(new Particle(getX() + random.nextInt(getWidth()), getY() + random.nextInt(getHeight()), 10, 10, Id.particle, handler));
+
+                particleDelay = 0;
+            }
+
+            invincibilityTime++;
+            if(invincibilityTime>=600) {
+                invincible = false;
+                invincibilityTime = 0;
+            }
+            if(velX==5) setVelX(8);
+            else if(velX==-5) setVelY(-8);
+        } else {
+            if(velX==8) setVelX(5);
+            else if(velX==-8) setVelY(-5);
+        }
+
+        if(restoring) {
+            restoreTime++;
+
+            if(restoreTime>=90) {
+                restoring = false;
+                restoreTime = 0;
+            }
+        }
 
 
         if (velX!=0) animate = true;
         else animate = false;
         for(int i=0;i<handler.tile.size();i++) {
             Tile t = handler.tile.get(i);
+            if(getBounds().intersects(t.getBounds())) {
+                if(t.getId()==Id.flag) Game.switchLevel();
+
+
+            }
+
             if(t.isSolid()&&!goingDownPipe) {
                 if (getBoundsTop().intersects(t.getBounds())) {
                     setVelY(0);
@@ -68,8 +123,8 @@ public class Player extends Entity {
                     if(falling) falling = false;
 
                 } else if(!falling&&!jumping) {
-                        gravity = 0.8;
-                        falling = true;
+                    gravity = 0.8;
+                    falling = true;
                 }
                 if (getBoundsLeft().intersects(t.getBounds())) {
                     setVelX(0);
@@ -79,6 +134,7 @@ public class Player extends Entity {
                     setVelX(0);
                     x = t.getX()-t.width;
                 }
+
             }
         }
         for(int i=0; i<handler.entity.size();i++) {
@@ -88,6 +144,7 @@ public class Player extends Entity {
                 switch(e.getType()) {
                     case 0:
                         if(getBounds().intersects(e.getBounds())) {
+                            Game.powerup.play();
                             int tpX = getX();
                             int tpY = getY();
                             width+=(width/3);
@@ -100,91 +157,125 @@ public class Player extends Entity {
                         break;
                     case 1:
                         if(getBounds().intersects(e.getBounds())) {
+                            Game.powerup.play();
                             Game.lives++;
                             e.die();
                         }
                 }
-            } else if(e.getId()==Id.goomba||e.getId()==Id.towerBoss) {
-                if(getBoundsBottom().intersects(e.getBoundsTop())) {
-                    if(e.getId()!=Id.towerBoss) e.die();
-                    else if(e.attackable) {
-                        e.hp--;
-                        e.falling = true;
-                        e.gravity = 0.8;
-                        e.bossState = BossState.RECOVERING;
-                        e.attackable = false;
-                        e.phaseTime = 0;
+            } else if(e.getId()==Id.goomba||e.getId()==Id.towerBoss||e.getId()==Id.plant||e.getId()==Id.minion||e.getId()==Id.ghost||e.getId()==Id.pirate||e.getId()==Id.marsh||e.getId()==Id.alien) {
+                if(invincible&&getBounds().intersects(e.getBounds())) e.die();
+                else {
+                    if(getBoundsBottom().intersects(e.getBoundsTop())) {
+                        if(e.getId()!=Id.towerBoss){
+                            e.die();
 
-                        jumping = true;
-                        falling = false;
-                        gravity = 3.5;
-                    }
-                } else if(getBounds().intersects(e.getBounds())) {
-                    if(state==PlayerState.BIG){
-                        state = PlayerState.SMALL;
-                        width/=3;
-                        height/=3;
-                        x+=width;
-                        y+=height;
-                    }
-                    else if(state==PlayerState.SMALL){
-                        die();
+                            Game.goombastomp.play();
+                            Game.score += 100;
+                        }
+                        else if(e.attackable) {
+                            e.hp--;
+                            e.falling = true;
+                            e.gravity = 0.8;
+                            e.bossState = BossState.RECOVERING;
+                            e.attackable = false;
+                            e.phaseTime = 0;
+
+                            jumping = true;
+                            falling = false;
+                            gravity = 3.5;
+                        }
+                    } else if(getBounds().intersects(e.getBounds())) {
+                        if(state==PlayerState.BIG){
+                            Game.mobhit.play();
+                            takeDamage();
+                        }
+                        else takeDamage();
                     }
                 }
+
+
             } else if(e.getId()==Id.coin) {
                 if(getBounds().intersects(e.getBounds())&&e.getId()==Id.coin) {
+                    Game.getcoin.play();
                     Game.coins++;
                     e.die();
                 }
             } else if(e.getId()==Id.koopa) {
-                if(e.koopaState==KoopaStates.WALKING) {
+                if(invincible&&getBounds().intersects(e.getBounds())) e.die();
+                else {
+                    if(e.koopaState==KoopaStates.WALKING) {
 
-                    if(getBoundsBottom().intersects(e.getBoundsTop())) {
-                        e.koopaState = KoopaStates.SHELL;
+                        if(getBoundsBottom().intersects(e.getBoundsTop())) {
+                            e.koopaState = KoopaStates.SHELL;
 
-                        jumping = true;
-                        falling = false;
-                        gravity = 3.5;
-                    }   else if(getBounds().intersects(e.getBounds())) die();
+                            jumping = true;
+                            falling = false;
+                            gravity = 3.5;
+                        }   else if(getBounds().intersects(e.getBounds())) takeDamage();
 
-                } else if(e.koopaState==KoopaStates.SHELL) {
-                    if(getBoundsBottom().intersects(e.getBoundsTop())) {
-                        e.koopaState = KoopaStates.SPINNING;
+                    } else if(e.koopaState==KoopaStates.SHELL) {
+                        if(getBoundsBottom().intersects(e.getBoundsTop())) {
+                            e.koopaState = KoopaStates.SPINNING;
 
-                        int dir = random.nextInt(2);
+                            int dir = random.nextInt(2);
 
-                        switch (dir) {
-                            case 0:
-                                e.setVelX(-10);
-                                facing = 0;
-                                break;
-                            case 1:
-                                e.setVelX(10);
-                                facing = 1;
-                                break;
+                            switch (dir) {
+                                case 0:
+                                    e.setVelX(-10);
+                                    facing = 0;
+                                    break;
+                                case 1:
+                                    e.setVelX(10);
+                                    facing = 1;
+                                    break;
+                            }
+
+                            jumping = true;
+                            falling = false;
+                            gravity = 3.5;
+                        }
+                        if(getBoundsLeft().intersects(e.getBoundsRight())) {
+                            e.setVelX(-10);
+                            e.koopaState = KoopaStates.SPINNING;
+                        }
+                        if(getBoundsRight().intersects(e.getBoundsLeft())) {
+                            e.setVelX(-10);
+                            e.koopaState = KoopaStates.SPINNING;
                         }
 
-                        jumping = true;
-                        falling = false;
-                        gravity = 3.5;
-                    }
-                    if(getBoundsLeft().intersects(e.getBoundsRight())) {
-                        e.setVelX(-10);
-                        e.koopaState = KoopaStates.SPINNING;
-                    }
-                    if(getBoundsRight().intersects(e.getBoundsLeft())) {
-                        e.setVelX(-10);
-                        e.koopaState = KoopaStates.SPINNING;
-                    }
+                    } else if(e.koopaState==KoopaStates.SPINNING) {
+                        if(getBoundsBottom().intersects(e.getBoundsTop())) {
+                            e.koopaState = KoopaStates.SHELL;
 
-                } else if(e.koopaState==KoopaStates.SPINNING) {
-                    if(getBoundsBottom().intersects(e.getBoundsTop())) {
-                        e.koopaState = KoopaStates.SHELL;
+                            jumping = true;
+                            falling = false;
+                            gravity = 3.5;
+                        }   else if(getBounds().intersects(e.getBounds())) takeDamage();
+                    }
+                }
 
-                        jumping = true;
-                        falling = false;
-                        gravity = 3.5;
-                    }   else if(getBounds().intersects(e.getBounds())) die();
+            }
+            else if(e.getId()==Id.star) {
+                if(getBounds().intersects(e.getBounds())) {
+                    Game.powerup.play();
+                    invincible = true;
+                    e.die();
+                }
+            }
+            else if(e.getId()==Id.flower) {
+                if(getBounds().intersects(e.getBounds())){
+                    if(state==PlayerState.SMALL) {
+                        Game.powerup.play();
+                        int tpX = getX();
+                        int tpY = getY();
+                        width+=(width/3);
+                        height+=(height/3);
+                        setX(tpX-width);
+                        setY(tpY-height);
+                    }
+                    state = PlayerState.FIRE;
+
+                    e.die();
                 }
             }
         }
@@ -237,6 +328,33 @@ public class Player extends Entity {
                     }
                 }
             }
+        }
+    }
+    public void takeDamage() {
+        if(restoring) return;
+
+        if(state==PlayerState.SMALL) {
+            die();
+            return;
+        }
+        else if(state==PlayerState.BIG) {
+            width-=(width/4);
+            height-=(height/4);
+            x+=width/4;
+            y+=height/4;
+            //put dmg sound
+            restoring = true;
+            restoreTime = 0;
+
+            state = PlayerState.SMALL;
+            return;
+        }
+        else if(state==PlayerState.FIRE) {
+            state = PlayerState.BIG;
+            //put dmg sound
+            restoring = true;
+            restoreTime = 0;
+            return;
         }
     }
 }

@@ -4,19 +4,20 @@ import com.tutorial.mario.Game;
 import com.tutorial.mario.Handler;
 import com.tutorial.mario.Id;
 import com.tutorial.mario.entity.Entity;
+import com.tutorial.mario.gfx.Sprite;
 import com.tutorial.mario.tile.Tile;
 
 import java.awt.*;
 import java.util.Random;
-
 public class Mushroom extends Entity {
     private Random random = new Random();
 
 
 
-    public Mushroom( int x, int y, int width, int height, Id id, Handler handler, int type) {
+    public Mushroom(int x, int y, int width, int height, Id id, Handler handler, Sprite powerUp, int type) {
         super(x, y, width, height, id, handler);
         this.type = type;
+
 
         int dir = random.nextInt(2);
 
