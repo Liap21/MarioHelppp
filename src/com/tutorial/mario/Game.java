@@ -36,7 +36,7 @@ public class Game extends Canvas implements Runnable {
 
     public static int coins = 0;
     public static int score = 0;
-    public static int lives = 4;
+    public static int lives = 1;
     public static int deathScreenTime = 0;
     public static boolean gameOver = false;
     public static boolean playing = false;
@@ -192,6 +192,8 @@ public class Game extends Canvas implements Runnable {
             levels[1] = ImageIO.read(getClass().getResource("/level2.png"));
             levels[2] = ImageIO.read(getClass().getResource("/bosslevel.png"));
             background = ImageIO.read(getClass().getResource("/scoobydoobackground.png"));
+            background1 = ImageIO.read(getClass().getResource("/MLbackground.png"));
+            background2 = ImageIO.read(getClass().getResource("/Southparkbackground.png"));
 
 
         } catch (IOException e) {
@@ -269,7 +271,9 @@ public class Game extends Canvas implements Runnable {
         Graphics g = bs.getDrawGraphics();
 
        if(!showDeathScreen) {
-           g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
+           if(level == 0) g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
+           if(level == 1) g.drawImage(background1, 0, 0, getWidth(), getHeight(), null);
+           if(level == 2) g.drawImage(background2, 0, 0, getWidth(), getHeight(), null);
 
            g.setColor(Color.WHITE);
            g.setFont(new Font("Courier", Font.BOLD, 20));
@@ -277,6 +281,7 @@ public class Game extends Canvas implements Runnable {
            g.drawImage(coin.getBufferedImage(), 20, 20, 75, 75, null);
            g.setFont(new Font("Courier", Font.BOLD, 20));
            g.drawString("Score: " + score, 100, 150);
+
 
        }
         if(showDeathScreen) {
@@ -288,15 +293,20 @@ public class Game extends Canvas implements Runnable {
                 g.setFont(new Font("Courier", Font.BOLD, 20));
                 g.drawImage(player[4].getBufferedImage(), 500,  300, 100, 100, null);
                 g.drawString("x" + lives, 610, 370);
-            } else {
+            } else if(gameOver) {
                 g.setColor(Color.WHITE);
                 g.setFont(new Font("Courier", Font.BOLD, 20));
                 g.drawString("GAMEOVER ;-;", 300, 370);
-            }
+                deathScreenTime++;
+                if(deathScreenTime >= 300) {
+                    launcher.render(g);
+                     }
+
+                }
             }
 
        if(playing) g.translate(cam.getX(), cam.getY());
-        if(!showDeathScreen&&playing) handler.  render(g);
+        if(!showDeathScreen&&playing) handler.render(g);
         else if(!playing) launcher.render(g);
         g.dispose();
         bs.show();

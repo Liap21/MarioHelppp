@@ -1,88 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0d92ccc6-f133-43fb-ab9f-8ffd0f932cc6" name="Default Changelist" comment="new">
-      <change afterPath="$PROJECT_DIR$/res/Sprite2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/StompingGoomba.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/death-sound.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/getcoin.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/jump.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/level complete.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/mob-hit.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/power-up.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/retro-funk-theme-music.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/scoobydoobackground.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/stomp.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/tutorial/mario/Sound.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/tutorial/mario/entity/Fireball.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/tutorial/mario/entity/Particle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/tutorial/mario/entity/mob/Alien.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/tutorial/mario/entity/mob/Ghost.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/tutorial/mario/entity/mob/Marsh.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/tutorial/mario/entity/mob/Minion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/tutorial/mario/entity/mob/Pirate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/tutorial/mario/entity/mob/Plant.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/tutorial/mario/entity/powerup/Flower.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/tutorial/mario/entity/powerup/PowerStar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/tutorial/mario/tile/Flag.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/tutorial/mario/tile/Trail.java" afterDir="false" />
+    <list default="true" id="b3cfdd3c-3dc0-41a8-b817-cfc9988f06fa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/res/MLbackground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/Southparkbackground.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Mario/Sprite.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/Sprite.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/Handler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/Handler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/Id.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/Id.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/entity/Entity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/entity/Entity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/entity/mob/Goomba.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/entity/mob/Goomba.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/entity/mob/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/entity/mob/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/entity/powerup/Mushroom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/entity/powerup/Mushroom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/input/KeyInput.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/input/KeyInput.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/states/PlayerState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/states/PlayerState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/tile/PowerUpBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/tile/PowerUpBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/tile/Tile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/tile/Tile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Mario/level.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/level.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/Sprite.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/res/Sprite.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/level.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/level.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/entity/mob/TowerBoss.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/entity/mob/TowerBoss.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/Handler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/Id.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/Id.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/entity/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/entity/mob/Goomba.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/entity/mob/Goomba.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/entity/mob/Koopa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/entity/mob/Koopa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/entity/mob/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/entity/mob/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/entity/mob/TowerBoss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/entity/mob/TowerBoss.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/entity/powerup/Mushroom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/entity/powerup/Mushroom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/input/KeyInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/input/KeyInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/states/PlayerState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/states/PlayerState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/tile/Pipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/tile/Pipe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/tile/PowerUpBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/tile/PowerUpBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/tile/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/tile/Tile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Enum" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitSEFilterConfiguration">
-    <file-type-list>
-      <filtered-out-file-type name="LOCAL_BRANCH" />
-      <filtered-out-file-type name="REMOTE_BRANCH" />
-      <filtered-out-file-type name="TAG" />
-      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
-    </file-type-list>
-  </component>
-  <component name="ProjectId" id="2OSpHnReKFFjx3Y5KtEWealINHE" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="2P6K7XAHtp5SKHUp7A52llbwnEc" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -90,22 +25,6 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/res" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.2" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.tutorial.mario.states" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Sony\Desktop\Mario\res" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Sony\Desktop\Mario\res" />
-    </key>
   </component>
   <component name="RunManager">
     <configuration name="Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -130,20 +49,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="0d92ccc6-f133-43fb-ab9f-8ffd0f932cc6" name="Default Changelist" comment="" />
-      <created>1681563753598</created>
+      <changelist id="b3cfdd3c-3dc0-41a8-b817-cfc9988f06fa" name="Default Changelist" comment="" />
+      <created>1682771990871</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1681563753598</updated>
+      <updated>1682771990871</updated>
     </task>
-    <task id="LOCAL-00001" summary="new">
-      <created>1682062795381</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1682062795382</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -156,21 +67,5 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="ada" />
-    <MESSAGE value="new" />
-    <option name="LAST_COMMIT_MESSAGE" value="new" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.NullPointerException" package="java.lang" />
-          <option name="timeStamp" value="3" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
