@@ -336,6 +336,9 @@ public class Player extends Entity {
 
         if(state==PlayerState.SMALL) {
             die();
+            if(Game.gameOver) {
+                //Game.lives = 2;
+            }
             return;
         }
         else if(state==PlayerState.BIG) {

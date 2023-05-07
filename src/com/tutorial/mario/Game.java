@@ -36,6 +36,7 @@ public class Game extends Canvas implements Runnable {
     private static BufferedImage introbg4;
     private static BufferedImage introbg5;
     private static BufferedImage introbg6;
+    private static BufferedImage outrobg;
 
 
     private static BufferedImage background;
@@ -47,7 +48,7 @@ public class Game extends Canvas implements Runnable {
 
     public static int coins = 0;
     public static int score = 0;
-    public static int lives = 1;
+    public static int lives = 2;
     public static int deathScreenTime = 0;
     public static boolean gameOver = false;
     public static boolean playing = false;
@@ -118,8 +119,8 @@ public class Game extends Canvas implements Runnable {
 
     private void init() {
         handler = new Handler();
-        sheet = new SpriteSheet("/Sprite.jpg");
-        sheet2 = new SpriteSheet("/Sprite2.jpg");
+        sheet = new SpriteSheet("/testSpriteTransparent.png");
+        sheet2 = new SpriteSheet("/testSprite2Transparent.png");
         cam = new Camera();
         launcher = new Launcher();
         mouse = new MouseInput();
@@ -158,7 +159,7 @@ public class Game extends Canvas implements Runnable {
 
         bossIdle = new Sprite(sheet, 7, 3);
         bossRunningleft = new Sprite(sheet,2, 2 );
-        bossRunningright = new Sprite(sheet, 5, 2);
+        bossRunningright    = new Sprite(sheet, 5, 2);
         bossRecoverting = new Sprite(sheet, 3, 3);
 
 
@@ -213,7 +214,7 @@ public class Game extends Canvas implements Runnable {
 
         try {
 
-            levels[0] = ImageIO.read(getClass().getResource("/bosslevel.png"));
+            levels[0] = ImageIO.read(getClass().getResource("/introlevel.png"));
             introbg1 = ImageIO.read(getClass().getResource("/intro1.png"));
             levels[1] = ImageIO.read(getClass().getResource("/introlevel.png"));
             introbg2 = ImageIO.read(getClass().getResource("/intro2.png"));
@@ -238,7 +239,8 @@ public class Game extends Canvas implements Runnable {
             levels[12] = ImageIO.read(getClass().getResource("/ML7.png"));
             levels[13] = ImageIO.read(getClass().getResource("/ML8.png"));
             background1 = ImageIO.read(getClass().getResource("/Southparkbackground.png"));
-
+            levels[14] = ImageIO.read(getClass().getResource("/Ending.png"));
+            outrobg = ImageIO.read(getClass().getResource("/Outro.png"));
 
            // background4 = ImageIO.read(getClass().getResource(""));
 
@@ -314,101 +316,192 @@ public class Game extends Canvas implements Runnable {
 
 
     public void render() {
-        BufferStrategy bs = getBufferStrategy();
-        if(bs == null) {
-            createBufferStrategy(4);
+        if(level <= 5) {
+            BufferStrategy bs = getBufferStrategy();
+            if (bs == null) {
+                createBufferStrategy(4);
                 return;
-        }
-        Graphics g = bs.getDrawGraphics();
+            }
+            Graphics g = bs.getDrawGraphics();
 
-       if(!showDeathScreen) {
-           if(level == 0) {
-               g.drawImage(introbg1, 0, 0, getWidth(), getHeight(), null);
-           }
-           else if(level == 1) {
-               g.drawImage(introbg2, 0, 0, getWidth(), getHeight(), null);
-           }
-           else if(level == 2) {
-               g.drawImage(introbg3, 0, 0, getWidth(), getHeight(), null);
-           }
-           else if(level == 3) {
-               g.drawImage(introbg4, 0, 0, getWidth(), getHeight(), null);
-           }
-           else if(level == 4) {
-               g.drawImage(introbg5, 0, 0, getWidth(), getHeight(), null);
-           }
-           else if(level == 5) {
-               g.drawImage(introbg6, 0, 0, getWidth(), getHeight(), null);
-           }
+            if (playing) g.translate(cam.getX(), cam.getY());
+            if (!showDeathScreen && playing) handler.render(g);
 
-           else if (level == 6) {
-               g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
-           }
-           else if(level == 7) {
-               g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
-           }
-           else if(level == 8) {
-               g.drawImage(background2, 0, 0, getWidth(), getHeight(), null);
-           }
-           else if(level == 9) {
-               g.drawImage(background2, 0, 0, getWidth(), getHeight(), null);
-           }
-           else if(level == 10) {
-               g.drawImage(background3, 0, 0, getWidth(), getHeight(), null);
-           }
-           else if(level == 11) {
-               g.drawImage(background3, 0, 0, getWidth(), getHeight(), null);
-           }
-           else if(level == 12) {
-               g.drawImage(background1, 0, 0, getWidth(), getHeight(), null);
-           }
-           else if(level == 13) {
-               g.drawImage(background1, 0, 0, getWidth(), getHeight(), null);
-           }
+            if (!showDeathScreen) {
+                if (level == 0) {
+                    g.drawImage(introbg1, 0, 0, getWidth(), getHeight(), null);
+                } else if (level == 1) {
+                    g.drawImage(introbg2, 0, 0, getWidth(), getHeight(), null);
+                } else if (level == 2) {
+                    g.drawImage(introbg3, 0, 0, getWidth(), getHeight(), null);
+                } else if (level == 3) {
+                    g.drawImage(introbg4, 0, 0, getWidth(), getHeight(), null);
+                } else if (level == 4) {
+                    g.drawImage(introbg5, 0, 0, getWidth(), getHeight(), null);
+                } else if (level == 5) {
+                    g.drawImage(introbg6, 0, 0, getWidth(), getHeight(), null);
+                } else if (level == 6) {
+                    g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
+                } else if (level == 7) {
+                    g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
+                } else if (level == 8) {
+                    g.drawImage(background2, 0, 0, getWidth(), getHeight(), null);
+                } else if (level == 9) {
+                    g.drawImage(background2, 0, 0, getWidth(), getHeight(), null);
+                } else if (level == 10) {
+                    g.drawImage(background3, 0, 0, getWidth(), getHeight(), null);
+                } else if (level == 11) {
+                    g.drawImage(background3, 0, 0, getWidth(), getHeight(), null);
+                } else if (level == 12) {
+                    g.drawImage(background1, 0, 0, getWidth(), getHeight(), null);
+                } else if (level == 13) {
+                    g.drawImage(background1, 0, 0, getWidth(), getHeight(), null);
+                } else if (level == 14) {
+                    g.drawImage(outrobg, 0, 0, getWidth(), getHeight(), null);
+                }
 
 
 
 
-           g.setColor(Color.WHITE);
-           g.setFont(new Font("Courier", Font.BOLD, 20));
-           g.drawString("x" + coins, 100, 95);
-           g.drawImage(coin.getBufferedImage(), 20, 20, 75, 75, null);
-           g.setFont(new Font("Courier", Font.BOLD, 20));
-           g.drawString("Score: " + score, 100, 150);
 
+            }
+            if (showDeathScreen) {
+                g.setColor(Color.BLACK);
+                g.fillRect(0, 0, getWidth(), getHeight());
 
-       }
-        if(showDeathScreen) {
-            g.setColor(Color.BLACK);
-            g.fillRect(0,0,getWidth(),getHeight());
-
-            if(!gameOver) {
-                g.setColor(Color.WHITE);
-                g.setFont(new Font("Courier", Font.BOLD, 20));
-                g.drawImage(player[4].getBufferedImage(), 500,  300, 100, 100, null);
-                g.drawString("x" + lives, 610, 370);
-            } else if(gameOver) {
-                g.setColor(Color.WHITE);
-                g.setFont(new Font("Courier", Font.BOLD, 20));
-                g.drawString("You Died ;-;", 300, 370);
-                deathScreenTime++;
-                if(deathScreenTime >= 300) launcher.render(g);
+                if (!gameOver) {
+                    g.setColor(Color.WHITE);
+                    g.setFont(new Font("Courier", Font.BOLD, 20));
+                    g.drawImage(player[4].getBufferedImage(), 500, 300, 100, 100, null);
+                    g.drawString("x" + lives, 610, 370);
+                } else if (gameOver) {
+                    g.setColor(Color.WHITE);
+                    g.setFont(new Font("Courier", Font.BOLD, 20));
+                    g.drawString("You Died ;-;", 300, 370);
+                    deathScreenTime++;
+                    if (deathScreenTime >= 300) launcher.render(g);
+                    Game.ScoobyDooTheme.stop();
+                    Game.SouthParkTheme.stop();
+                    Game.OPTheme.stop();
+                    Game.MlTheme.stop();
                 }
             }
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Courier", Font.BOLD, 20));
+            g.drawString("x" + coins, 100, 95);
+            g.drawImage(coin.getBufferedImage(), 20, 20, 75, 75, null);
+            g.setFont(new Font("Courier", Font.BOLD, 20));
+            g.drawString("Score: " + score, 100, 150);
 
-       if(playing) g.translate(cam.getX(), cam.getY());
-        if(!showDeathScreen&&playing) handler.render(g);
-        else if(!playing) launcher.render(g);
-        g.dispose();
-        bs.show();
+            if (!playing) launcher.render(g);
+            g.dispose();
+            bs.show();
+        }
+        else {
+            BufferStrategy bs = getBufferStrategy();
+            if(bs == null) {
+                createBufferStrategy(4);
+                return;
+            }
+            Graphics g = bs.getDrawGraphics();
+
+            if(!showDeathScreen) {
+                if(level == 0) {
+                    g.drawImage(introbg1, 0, 0, getWidth(), getHeight(), null);
+                }
+                else if(level == 1) {
+                    g.drawImage(introbg2, 0, 0, getWidth(), getHeight(), null);
+                }
+                else if(level == 2) {
+                    g.drawImage(introbg3, 0, 0, getWidth(), getHeight(), null);
+                }
+                else if(level == 3) {
+                    g.drawImage(introbg4, 0, 0, getWidth(), getHeight(), null);
+                }
+                else if(level == 4) {
+                    g.drawImage(introbg5, 0, 0, getWidth(), getHeight(), null);
+                }
+                else if(level == 5) {
+                    g.drawImage(introbg6, 0, 0, getWidth(), getHeight(), null);
+                }
+
+                else if (level == 6) {
+                    g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
+                }
+                else if(level == 7) {
+                    g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
+                }
+                else if(level == 8) {
+                    g.drawImage(background2, 0, 0, getWidth(), getHeight(), null);
+                }
+                else if(level == 9) {
+                    g.drawImage(background2, 0, 0, getWidth(), getHeight(), null);
+                }
+                else if(level == 10) {
+                    g.drawImage(background3, 0, 0, getWidth(), getHeight(), null);
+                }
+                else if(level == 11) {
+                    g.drawImage(background3, 0, 0, getWidth(), getHeight(), null);
+                }
+                else if(level == 12) {
+                    g.drawImage(background1, 0, 0, getWidth(), getHeight(), null);
+                }
+                else if(level == 13) {
+                    g.drawImage(background1, 0, 0, getWidth(), getHeight(), null);
+                }
+                else if(level == 14) {
+                    g.drawImage(outrobg, 0, 0, getWidth(), getHeight(), null);
+                }
+
+
+
+            }
+            if(showDeathScreen) {
+                g.setColor(Color.BLACK);
+                g.fillRect(0,0,getWidth(),getHeight());
+
+                if(!gameOver) {
+                    g.setColor(Color.WHITE);
+                    g.setFont(new Font("Courier", Font.BOLD, 20));
+                    g.drawImage(player[4].getBufferedImage(), 500,  300, 100, 100, null);
+                    g.drawString("x" + lives, 610, 370);
+                } else if(gameOver) {
+                    g.setColor(Color.WHITE);
+                    g.setFont(new Font("Courier", Font.BOLD, 20));
+                    g.drawString("You Died ;-;", 300, 370);
+                    deathScreenTime++;
+                    if(deathScreenTime >= 300) launcher.render(g);
+                    Game.ScoobyDooTheme.stop();
+                    Game.SouthParkTheme.stop();
+                    Game.OPTheme.stop();
+                    Game.MlTheme.stop();
+                }
+            }
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Courier", Font.BOLD, 20));
+            g.drawString("x" + coins, 100, 95);
+            g.drawImage(coin.getBufferedImage(), 20, 20, 75, 75, null);
+            g.setFont(new Font("Courier", Font.BOLD, 20));
+            g.drawString("Score: " + score, 100, 150);
+
+            if(playing) g.translate(cam.getX(), cam.getY());
+            if(!showDeathScreen&&playing) handler.render(g);
+            if(!playing) launcher.render(g);
+            g.dispose();
+            bs.show();
+        }
     }
+
+
 
     private boolean isActiveLevel(BufferedImage level) {
         return true;
     }
 
     public void tick() {
-        if(playing) handler.tick();
+            if(playing) {
+                handler.tick();
+            }
 
         for(int i=0;i<handler.entity.size();i++) {
             Entity e = handler.entity.get(i);
@@ -423,24 +516,18 @@ public class Game extends Canvas implements Runnable {
                 deathScreenTime = 0;
                 handler.clearLevel();
                 handler.createLevel(levels[level]);
-                //if(level == 0) Game.ScoobyDooTheme.play();
-                //if(level == 1) Game.ScoobyDooTheme.play();
+
 
             } else if(gameOver) {
                 showDeathScreen = false;
                 deathScreenTime = 0;
                 playing = false;
-                lives += 2;
+                lives = 2;
+                System.out.println(lives);
                 coins = 0;
                 score = 0;
                 handler.clearLevel();
                 handler.createLevel(levels[level]);
-               // if(level == 0) {
-               //     Game.ScoobyDooTheme.play();
-               // }
-               // else if(level == 1) {
-               //     Game.ScoobyDooTheme.play();
-               // }
             }
 
         }
@@ -456,14 +543,26 @@ public class Game extends Canvas implements Runnable {
 
     public static void switchLevel() {
         Game.level++;
+        System.out.println(level);
 
         handler.clearLevel();
         handler.createLevel(levels[level]);
 
+        if(level == 6)Game.ScoobyDooTheme.play();
+        else if(level == 7)Game.ScoobyDooTheme.play();
+        else if(level == 8)Game.SouthParkTheme.play();
+        else if(level == 9)Game.SouthParkTheme.play();
+        else if(level == 10)Game.OPTheme.play();
+        else if(level == 11)Game.OPTheme.play();
+        else if(level == 12)Game.MlTheme.play();
+        else if(level == 13)Game.MlTheme.play();
 
-        if(level == 1) {
-            Game.ScoobyDooTheme.close();
-        }
+
+
+        if(level == 8) Game.ScoobyDooTheme.stop();
+        else if(level == 10) Game.SouthParkTheme.stop();
+        else if(level == 12) Game.OPTheme.stop();
+        else if(level == 14) Game.MlTheme.stop();
         Game.levelcomplete.play();
     }
 

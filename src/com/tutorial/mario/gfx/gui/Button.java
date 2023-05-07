@@ -35,6 +35,16 @@ public class Button {
     public void triggerEvent() {
         if(getLabel().toLowerCase().contains("start")) {
             Game.playing = true;
+            Game.lives = 2;
+            Game.gameOver = false;
+            if(level == 6)Game.ScoobyDooTheme.play();
+            else if(level == 7)Game.ScoobyDooTheme.play();
+            else if(level == 8)Game.SouthParkTheme.play();
+            else if(level == 9)Game.SouthParkTheme.play();
+            else if(level == 10)Game.OPTheme.play();
+            else if(level == 11)Game.OPTheme.play();
+            else if(level == 12)Game.MlTheme.play();
+            else if(level == 13)Game.MlTheme.play();
         }
         else if(getLabel().toLowerCase().contains("exit")) System.exit(0);
         else if(getLabel().toLowerCase().contains("previous")) {

@@ -54,8 +54,6 @@ public class TowerBoss extends Entity {
             }
         }
 
-        g.fillRect(x,y,width,height);
-
     }
 
     public void tick() {
@@ -127,13 +125,13 @@ public class TowerBoss extends Entity {
                 if (getBoundsLeft().intersects(t.getBounds())) {
                     setVelX(0);
                     if(bossState == BossState.RUNNING) setVelX(4);
-                    facing = 0;
+                    facing = 1;
                     x = t.getX()+t.width;
                 }
                 if (getBoundsRight().intersects(t.getBounds())) {
                     setVelX(0);
                     if(bossState == BossState.RUNNING) setVelX(-4);
-                    facing = 1;
+                    facing = 0;
                     x = t.getX()-t.width;
                 }
             }
