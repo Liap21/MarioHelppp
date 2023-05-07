@@ -1,25 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="b3cfdd3c-3dc0-41a8-b817-cfc9988f06fa" name="Default Changelist" comment="    new">
-      <change beforePath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/entity/mob/TowerBoss.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/entity/mob/TowerBoss.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/Ben10Theme.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/Ending.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/MLTheme.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/OPTheme.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/OPbackground.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ScoobyDooTheme.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/SouthParkTheme.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/level1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/testlevel.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/tutorial/mario/tile/Ending.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Mario/Thumbs.db" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/Thumbs.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/Handler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/Handler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/Id.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/Id.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/entity/Entity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/entity/Entity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/entity/mob/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/entity/mob/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/gfx/gui/Button.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/gfx/gui/Button.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/gfx/gui/Launcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Mario/com/tutorial/mario/gfx/gui/Launcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Thumbs.db" beforeDir="false" afterPath="$PROJECT_DIR$/res/Thumbs.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/Handler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/Id.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/Id.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/entity/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/entity/mob/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/entity/mob/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/entity/mob/TowerBoss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/entity/mob/TowerBoss.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/gfx/gui/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/gfx/gui/Button.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/tutorial/mario/gfx/gui/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tutorial/mario/gfx/gui/Launcher.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="2P6K7XAHtp5SKHUp7A52llbwnEc" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\rhon karl\Desktop\Mario\res" />
+      <recent name="C:\Users\Sony\Desktop\Mario\res" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\rhon karl\Desktop\Mario\res" />
+      <recent name="C:\Users\user\OneDrive\Desktop\Mario\res" />
+      <recent name="C:\Users\Sony\Desktop\Mario\res" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -57,7 +106,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682775948391</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="    new">
+      <created>1682776526977</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1682776526977</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -70,6 +126,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="new" />

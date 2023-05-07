@@ -54,7 +54,9 @@ public abstract class Entity {
             Game.coins = 0;
             Game.score = 0;
 
-            if(Game.lives<=0) Game.gameOver = true;
+            if(Game.lives<=0) {
+                Game.gameOver = true;
+            }
 
             Game.losealife.play();
         }

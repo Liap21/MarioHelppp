@@ -99,8 +99,9 @@ public class Player extends Entity {
             Tile t = handler.tile.get(i);
             if(getBounds().intersects(t.getBounds())) {
                 if(t.getId()==Id.flag) Game.switchLevel();
-
-
+            }
+            if(getBounds().intersects(t.getBounds())) {
+                if(t.getId()==Id.ending) System.exit(0);
             }
 
             if(t.isSolid()&&!goingDownPipe) {

@@ -27,12 +27,23 @@ public class Game extends Canvas implements Runnable {
 
     private Thread thread;
     private boolean running = false;
-    private static BufferedImage[] levels;
-    private static int level = 0;
+    public static BufferedImage[] levels;
+    public static int level = 0;
+
+    private static BufferedImage introbg1;
+    private static BufferedImage introbg2;
+    private static BufferedImage introbg3;
+    private static BufferedImage introbg4;
+    private static BufferedImage introbg5;
+    private static BufferedImage introbg6;
+
 
     private static BufferedImage background;
     private static BufferedImage background1;
     private static BufferedImage background2;
+    private static BufferedImage background3;
+    private static BufferedImage background4;
+    private static BufferedImage background5;
 
     public static int coins = 0;
     public static int score = 0;
@@ -74,9 +85,13 @@ public class Game extends Canvas implements Runnable {
     public static Sprite[] particle;
     public static Sprite koopaShell;
     public KoopaStates koopaState;
-    public static Sprite[] bossIdle;
+    public static Sprite bossIdle;
+    public static Sprite bossRecoverting;
+    public static Sprite bossRunningleft;
+    public static Sprite bossRunningright;
 
     public static Sprite[] flag;
+    public static Sprite[] ending;
 
     public static Sound jump;
     public static Sound goombastomp;
@@ -87,6 +102,11 @@ public class Game extends Canvas implements Runnable {
     public static Sound getcoin;
     public static Sound firethrow;
     public static Sound mobhit;
+    public static Sound ScoobyDooTheme;
+    public static Sound SouthParkTheme;
+    public static Sound OPTheme;
+    public static Sound MlTheme;
+    public static Sound Ben10Theme;
 
 
     public Game() {
@@ -129,15 +149,20 @@ public class Game extends Canvas implements Runnable {
         marsh = new Sprite[9];
         koopa = new Sprite[9];
         koopaShell = new Sprite(sheet, 5, 3);
-        flag = new  Sprite[1];
+        flag = new Sprite[1];
+        ending = new Sprite[1];
         particle = new Sprite[5];
         firePlayer = new Sprite[8];
         flower = new Sprite(sheet, 14, 2);
         fireball = new Sprite(sheet, 15 ,1);
 
-        bossIdle = new Sprite[4];
+        bossIdle = new Sprite(sheet, 7, 3);
+        bossRunningleft = new Sprite(sheet,2, 2 );
+        bossRunningright = new Sprite(sheet, 5, 2);
+        bossRecoverting = new Sprite(sheet, 3, 3);
 
-        levels = new BufferedImage[3];
+
+        levels = new BufferedImage[17];
 
 
         for(int i = 0;i<player.length;i++) {
@@ -157,6 +182,9 @@ public class Game extends Canvas implements Runnable {
             }
         for(int i=0;i<flag.length;i++) {
             flag[i] = new Sprite(sheet2, i+16, 3);
+        }
+        for(int i=0;i<ending.length;i++) {
+            ending[i] = new Sprite(sheet2, i+16, 3);
         }
         for(int i=0;i<particle.length;i++) {
             particle[i] = new Sprite(sheet, i+1, 3);
@@ -180,21 +208,39 @@ public class Game extends Canvas implements Runnable {
             alien[i] = new Sprite(sheet, i+9, 4) ;
         }
 
-        for(int i = 0;i<bossIdle.length;i++) {
-            bossIdle[i] = new Sprite(sheet, i+5, 3) ;
-        }
 
 
 
         try {
 
-            levels[0] = ImageIO.read(getClass().getResource("/level.png"));
-            levels[1] = ImageIO.read(getClass().getResource("/level2.png"));
-            levels[2] = ImageIO.read(getClass().getResource("/bosslevel.png"));
-            background = ImageIO.read(getClass().getResource("/scoobydoobackground.png"));
-            background1 = ImageIO.read(getClass().getResource("/MLbackground.png"));
-            background2 = ImageIO.read(getClass().getResource("/Southparkbackground.png"));
+            levels[0] = ImageIO.read(getClass().getResource("/bosslevel.png"));
+            introbg1 = ImageIO.read(getClass().getResource("/intro1.png"));
+            levels[1] = ImageIO.read(getClass().getResource("/introlevel.png"));
+            introbg2 = ImageIO.read(getClass().getResource("/intro2.png"));
+            levels[2] = ImageIO.read(getClass().getResource("/introlevel.png"));
+            introbg3 = ImageIO.read(getClass().getResource("/intro3.png"));
+            levels[3] = ImageIO.read(getClass().getResource("/introlevel.png"));
+            introbg4 = ImageIO.read(getClass().getResource("/intro4.png"));
+            levels[4] = ImageIO.read(getClass().getResource("/introlevel.png"));
+            introbg5 = ImageIO.read(getClass().getResource("/intro5.png"));
+            levels[5] = ImageIO.read(getClass().getResource("/introlevel.png"));
+            introbg6 = ImageIO.read(getClass().getResource("/intro6.png"));
 
+            levels[6] = ImageIO.read(getClass().getResource("/Scoobs1.png"));
+            levels[7] = ImageIO.read(getClass().getResource("/Scoobs2.png"));
+            background = ImageIO.read(getClass().getResource("/scoobydoobackground.png"));
+            levels[8] = ImageIO.read(getClass().getResource("/SouthPark3.png"));
+            levels[9] = ImageIO.read(getClass().getResource("/Southpark4.png"));
+            background2 = ImageIO.read(getClass().getResource("/MLbackground.png"));
+            levels[10] = ImageIO.read(getClass().getResource("/OP5.png"));
+            levels[11] = ImageIO.read(getClass().getResource("/OP6.png"));
+            background3 = ImageIO.read(getClass().getResource("/OPbackground.jpg"));
+            levels[12] = ImageIO.read(getClass().getResource("/ML7.png"));
+            levels[13] = ImageIO.read(getClass().getResource("/ML8.png"));
+            background1 = ImageIO.read(getClass().getResource("/Southparkbackground.png"));
+
+
+           // background4 = ImageIO.read(getClass().getResource(""));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -209,11 +255,16 @@ public class Game extends Canvas implements Runnable {
         getcoin = new Sound("/getcoin.wav");
         firethrow = new Sound("/StompingGoomba.wav");
         mobhit = new Sound("/mob-hit.wav");
+        ScoobyDooTheme = new Sound("/ScoobyDooTheme.wav");
+        SouthParkTheme = new Sound("/SouthParkTheme.wav");
+        OPTheme = new Sound("/OPTheme.wav");
+        MlTheme = new Sound("/MLTheme.wav");
+        Ben10Theme = new Sound("/Ben10Theme.wav");
 
 
     }
 
-    private synchronized void start() {
+    public synchronized void start() {
         if (running) return;
         running = true;
         thread = new Thread(this, "Thread");
@@ -265,15 +316,58 @@ public class Game extends Canvas implements Runnable {
     public void render() {
         BufferStrategy bs = getBufferStrategy();
         if(bs == null) {
-            createBufferStrategy(3);
+            createBufferStrategy(4);
                 return;
         }
         Graphics g = bs.getDrawGraphics();
 
        if(!showDeathScreen) {
-           if(level == 0) g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
-           if(level == 1) g.drawImage(background1, 0, 0, getWidth(), getHeight(), null);
-           if(level == 2) g.drawImage(background2, 0, 0, getWidth(), getHeight(), null);
+           if(level == 0) {
+               g.drawImage(introbg1, 0, 0, getWidth(), getHeight(), null);
+           }
+           else if(level == 1) {
+               g.drawImage(introbg2, 0, 0, getWidth(), getHeight(), null);
+           }
+           else if(level == 2) {
+               g.drawImage(introbg3, 0, 0, getWidth(), getHeight(), null);
+           }
+           else if(level == 3) {
+               g.drawImage(introbg4, 0, 0, getWidth(), getHeight(), null);
+           }
+           else if(level == 4) {
+               g.drawImage(introbg5, 0, 0, getWidth(), getHeight(), null);
+           }
+           else if(level == 5) {
+               g.drawImage(introbg6, 0, 0, getWidth(), getHeight(), null);
+           }
+
+           else if (level == 6) {
+               g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
+           }
+           else if(level == 7) {
+               g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
+           }
+           else if(level == 8) {
+               g.drawImage(background2, 0, 0, getWidth(), getHeight(), null);
+           }
+           else if(level == 9) {
+               g.drawImage(background2, 0, 0, getWidth(), getHeight(), null);
+           }
+           else if(level == 10) {
+               g.drawImage(background3, 0, 0, getWidth(), getHeight(), null);
+           }
+           else if(level == 11) {
+               g.drawImage(background3, 0, 0, getWidth(), getHeight(), null);
+           }
+           else if(level == 12) {
+               g.drawImage(background1, 0, 0, getWidth(), getHeight(), null);
+           }
+           else if(level == 13) {
+               g.drawImage(background1, 0, 0, getWidth(), getHeight(), null);
+           }
+
+
+
 
            g.setColor(Color.WHITE);
            g.setFont(new Font("Courier", Font.BOLD, 20));
@@ -296,12 +390,9 @@ public class Game extends Canvas implements Runnable {
             } else if(gameOver) {
                 g.setColor(Color.WHITE);
                 g.setFont(new Font("Courier", Font.BOLD, 20));
-                g.drawString("GAMEOVER ;-;", 300, 370);
+                g.drawString("You Died ;-;", 300, 370);
                 deathScreenTime++;
-                if(deathScreenTime >= 300) {
-                    launcher.render(g);
-                     }
-
+                if(deathScreenTime >= 300) launcher.render(g);
                 }
             }
 
@@ -332,13 +423,24 @@ public class Game extends Canvas implements Runnable {
                 deathScreenTime = 0;
                 handler.clearLevel();
                 handler.createLevel(levels[level]);
+                //if(level == 0) Game.ScoobyDooTheme.play();
+                //if(level == 1) Game.ScoobyDooTheme.play();
 
-               // themesong.play();
             } else if(gameOver) {
                 showDeathScreen = false;
                 deathScreenTime = 0;
                 playing = false;
-                gameOver = false;
+                lives += 2;
+                coins = 0;
+                score = 0;
+                handler.clearLevel();
+                handler.createLevel(levels[level]);
+               // if(level == 0) {
+               //     Game.ScoobyDooTheme.play();
+               // }
+               // else if(level == 1) {
+               //     Game.ScoobyDooTheme.play();
+               // }
             }
 
         }
@@ -358,7 +460,10 @@ public class Game extends Canvas implements Runnable {
         handler.clearLevel();
         handler.createLevel(levels[level]);
 
-        //Game.themesong.close();
+
+        if(level == 1) {
+            Game.ScoobyDooTheme.close();
+        }
         Game.levelcomplete.play();
     }
 

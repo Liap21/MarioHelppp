@@ -71,12 +71,13 @@ public class Handler {
                 if(red==0&&green==0&&blue==0) addTile(new Wall(x*64, y*64,64,64,true, Id.wall,this));
                 if(red==0&&green==0&&blue==255) addEntity(new Player(x*64, y*64 ,48 ,48, Id.player, this));
                 if(red==255&&green==0&&blue==0) addEntity(new Goomba( x*64, y*64, 64, 64, Id.goomba, this));
-                if(red==255&&green==255&&blue==0) addTile(new PowerUpBlock(x*64,y*64,64,64,true,Id.powerUp,this,Game.flower, 0));
-                if(red==0&&green==255&&blue==255) addTile(new PowerUpBlock(x*64,y*64,64,64,true,Id.powerUp,this,Game.mushroom, 1));
-                if(red==0&&(green>123&&green<129)&&blue==0) addTile(new Pipe(x*64,y*64,64,64*15,true,Id.pipe,this,128-green, true));
+                if(red==255&&green==255&&blue==0) addEntity(new PowerStar(x*64,y*64,64,64,Id.star,this));
+                if(red==0&&green==255&&blue==255) addTile(new PowerUpBlock(x*64,y*64,64,64,true,Id.powerUp,this,Game.mushroom, 0));
+                if(red==0&&(green>123&&green<129)&&blue==0) addTile(new Pipe(x*64,y*64,64,64*15,true,Id.pipe,this,128-green, false));
                 if(red==255&&green==250&&blue==0) addEntity(new Coin(x*64,y*64,64,64,Id.coin,this));
                 if(red==255&&green==0&&blue==255) addEntity(new TowerBoss(x*64,y*64,64,64,Id.towerBoss,this, 3));
                 if(red==0&&green==255&&blue==0) addTile(new Flag(x*64,y*64,64,64*5,true,Id.flag,this));
+                if(red==75&&green==0&&blue==130) addTile(new Ending(x*64,y*64,64,64*5,true,Id.ending,this));
                 if(red==128&&green==0&&blue==0) addEntity(new Minion(x*64,y*64,64,64,Id.minion,this));
                 if(red==128&&green==128&&blue==128) addEntity(new Ghost(x*64,y*64,64,64,Id.ghost,this));
                 if(red==255&&green==165&&blue==0) addEntity(new Pirate(x*64,y*64,64,64,Id.pirate,this));

@@ -16,25 +16,43 @@ public class TowerBoss extends Entity {
 
     public boolean addJumpTime = false;
 
+    private Random random = new Random();
     private int frame = 0;
     private int frameDelay = 0;
     private boolean animate = false;
 
-    private Random random;
 
     public TowerBoss(int x, int y, int width, int height, Id id, Handler handler, int hp) {
         super(x, y, width, height, id, handler);
         this.hp = hp;
 
         bossState = BossState.IDLE;
-        random = new Random();
+
+        int dir = random.nextInt(2);
+
+        switch (dir) {
+            case 0: setVelX(-2);
+                facing = 0;
+                break;
+            case 1: setVelX(2);
+                facing = 1;
+                break;
+        }
 
     }
 
     public void render(Graphics g) {
-        if(bossState==BossState.IDLE||bossState==BossState.SPINNING) g.drawImage(Game.bossIdle[frame + 3].getBufferedImage(), x, y, width, height, null);
-        else if(bossState==BossState.RECOVERING) g.setColor(Color.RED);
-        else g.setColor(Color.ORANGE);
+        if(bossState==BossState.IDLE||bossState==BossState.SPINNING) g.drawImage(Game.bossIdle.getBufferedImage(), x, y, width, height, null);
+        else if(bossState==BossState.RECOVERING) g.drawImage(Game.bossRecoverting.getBufferedImage(), x, y, width, height, null);
+        else if(bossState==BossState.RUNNING) {
+            if(facing == 0) {
+                g.drawImage(Game.bossRunningleft.getBufferedImage(), x, y, width, height, null);
+
+            } else if(facing == 1) {
+                g.drawImage(Game.bossRunningright.getBufferedImage(), x, y, width, height, null);
+
+            }
+        }
 
         g.fillRect(x,y,width,height);
 
@@ -109,11 +127,13 @@ public class TowerBoss extends Entity {
                 if (getBoundsLeft().intersects(t.getBounds())) {
                     setVelX(0);
                     if(bossState == BossState.RUNNING) setVelX(4);
+                    facing = 0;
                     x = t.getX()+t.width;
                 }
                 if (getBoundsRight().intersects(t.getBounds())) {
                     setVelX(0);
                     if(bossState == BossState.RUNNING) setVelX(-4);
+                    facing = 1;
                     x = t.getX()-t.width;
                 }
             }
@@ -152,6 +172,16 @@ public class TowerBoss extends Entity {
             if (frameDelay>=3) {
                 frame++;
                 if(frame>=2) {
+                    frame = 0;
+                }
+                frameDelay = 0;
+            }
+        }
+        if(animate) {
+            frameDelay++;
+            if (frameDelay>=3) {
+                frame++;
+                if(frame>=4) {
                     frame = 0;
                 }
                 frameDelay = 0;

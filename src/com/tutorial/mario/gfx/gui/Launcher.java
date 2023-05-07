@@ -11,10 +11,11 @@ public class Launcher {
     public Button[] buttons;
 
     public Launcher() {
-        buttons = new Button[2];
+        buttons = new Button[3];
 
         buttons[0] = new Button(100, 100 ,100 ,100, "Start Game");
         buttons[1] = new Button(200, 200, 100, 100, "Exit Game");
+        buttons[2] = new Button(300, 300, 100, 100, "Previous level");
     }
 
 

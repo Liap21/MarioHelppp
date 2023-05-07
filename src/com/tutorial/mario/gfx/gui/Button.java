@@ -2,8 +2,11 @@ package com.tutorial.mario.gfx.gui;
 
 import com.tutorial.mario.Game;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.Locale;
+
+import static com.tutorial.mario.Game.*;
 
 public class Button {
     public int x, y;
@@ -30,8 +33,17 @@ public class Button {
         g.drawString(getLabel(), getX() + stringX, getY() + stringY);
     }
     public void triggerEvent() {
-        if(getLabel().toLowerCase().contains("start")) Game.playing = true;
+        if(getLabel().toLowerCase().contains("start")) {
+            Game.playing = true;
+        }
         else if(getLabel().toLowerCase().contains("exit")) System.exit(0);
+        else if(getLabel().toLowerCase().contains("previous")) {
+            Game.level--;
+            handler.clearLevel();
+            handler.createLevel(levels[level]);
+            Game.playing = true;
+        }
+
     }
 
     public int getX() {
